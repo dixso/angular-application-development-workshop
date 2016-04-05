@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>AngularJS application developement workshop</title>
+
+		<meta name="description" content="HTML enhanced for web apps!">
+		<meta name="author" content="Julio de la Calle">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/moon.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+		<style id="user-css-output" type="text/css">.reveal {
+			/*
+          Below are a few sample selectors for reference,
+          feel free to delete them.
+
+          // Change presentation background
+          & {
+              background: #a83239;
+          }
+
+          // Change color of body text
+          .slides {
+              color: #009999;
+          }
+
+          // Give all slides a drop shadow
+          .slides section {
+              box-shadow: 0 0 5px black;
+          }
+
+          // Include a custom font
+          @font-face {
+            font-family: "Cabin Sketch";
+            src: url("https://s3.amazonaws.com/static.slid.es/fonts/cabinsketch/cabinsketch-regular.woff") format("woff"),
+                 url("https://s3.amazonaws.com/static.slid.es/fonts/cabinsketch/cabinsketch-regular.ttf") format("truetype");
+          }
+
+          .slides h1, .slides h2, .slides h3 {
+              font-family: "Cabin Sketch";
+          }
+          */
+
+			/*
+          // Standard Rules
+          */
+
+			/*
+          // Animation Rules
+          */
+
+			/*
+          .animation-subtitle-fadein {
+              -webkit-animation: subtitle-fadein 1s 3s both;
+              animation: subtitle-fadein 1s 3s both;
+          }
+
+          @-webkit-keyframes subtitle-fadein {
+              0% {
+                  -webkit-filter: blur(100px);
+              }
+              100% {
+                  -webkit-filter: blur(0px);
+              }
+          }
+
+          @keyframes subtitle-fadein {
+              0% {
+                  transform: scale3d(10, 10, 1);
+                  filter: blur(100px);
+              }
+              100% {
+                  transform: scale3d(1, 1, 1);
+                  filter: blur(0px);
+              }
+          }
+          */
+
+		}
+		.reveal * {
+			font-weight: bold !important;
+		}
+		.reveal .roll > span {
+			display: inline-block;
+		}
+		.reveal .standard-avatar {
+			position: absolute;
+			top: -580px;
+			left: -330px;
+			max-width: none;
+			max-height: none;
+		}
+		.reveal .standard-position-absolute {
+			position: absolute;
+			width: 100%;
+		}
+		.reveal .standard-mask {
+			position: absolute;
+			top: -900px;
+			left: -50%;
+			width: 200%;
+			height: 2000px;
+		}
+		.reveal .standard-image-source {
+			position: absolute;
+			top: 450px;
+			right: 0;
+			color: #000;
+			font-size: 9px;
+		}
+		.reveal .standard-code {
+			display: inline-block;
+			text-align: left;
+		}
+		.reveal .visual-diagram {
+			-webkit-transform: rotate(45deg);
+			transform: rotate(45deg);
+		}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<div class="slides">
+				<!-- Presentation -->
+				<section>
+					<img data-src="assets/angular.png" alt="AngularJS" style="border: none; background: none; box-shadow: none;">
+					<h3>HTML enhanced for web apps!</h3>
+					<p>
+						<small>Created by <a href="https://www.linkedin.com/in/juliodelacalle">Julio de la Calle</a> / <a href="http://twitter.com/dixso9">@dixso9</a></small>
+					</p>
+				</section>
+
+				<!-- Pre-requisites -->
+				<section>
+					<section>
+						<h2>Prerequisites</h2>
+						<pre>$ brew install node</pre>
+						<pre>$ npm install -g gulp-cli</pre>
+						<pre>$ npm install -g bower</pre>
+						<pre>$ git clone git@github.com:dixso/angular-application-development-workshop.git</pre>
+						<pre>$ npm install</pre>
+					</section>
+					<section>
+						<img data-src="assets/npm.jpg" alt="npm install">
+					</section>
+				</section>
+
+				<!-- Introduction -->
+				<section>
+					<section>
+						<h2>A Brief Introduction</h2>
+					</section>
+					<section>
+						<img data-src="assets/jquery.png" alt="jQuery" style="border: none; background: #FFF; box-shadow: none; border-radius: 5px">
+						<p class="fragment">Once a best friend forever...</p>
+						<p class="fragment">until the era of webapps</p>
+					</section>
+					<section>
+						<h2>jQuery + Webapp = Headaches</h2>
+						<ul>
+							<li class="fragment">Structureless spaghetti code</li>
+							<li class="fragment">Not enough high level abstractions</li>
+						</ul>
+					</section>
+					<section>
+						<p>Then, there is</p>
+						<h2>Backbone.js</h2>
+						<p class="fragment">It brings structures to our codes...</p>
+						<p class="fragment">but still uses jQuery to handle the Views</p>
+					</section>
+					<section>
+						<p>What about</p>
+						<h2>High Level Abstractions?</h2>
+					</section>
+					<section>
+						<img data-src="assets/angular-logo.png" alt="Angular" style="border: none; background: none; box-shadow: none;">
+						<p>and why should I use it, exactly?</p>
+					</section>
+					<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+						<h2>It's FAST</h2>
+						<p>(Once you two become good buddies)</p>
+					</section>
+					<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
+						<h2>Separation of Concerns</h2>
+						<p>Strict separation between application logic and DOM manipulation</p>
+					</section>
+					<section>
+						<div style="background-color: rgb(194, 51, 101); width: 200%; height: 1500px; position: absolute; top: -100%; left: -50%; z-index: -3;"></div>
+						<div style="background-color: rgb(88, 130, 186); width: 200%; height: 500%; position: absolute; top: 1050%; left: 70%; z-index: -2;"></div>
+						<div style="background-color: rgb(124, 196, 51); width: 100%; height: 500%; position: absolute; top: 650%; left: -64%; z-index: -1;"></div>
+						<div>
+							<h1 style="font-weight: bold; position: absolute; left: 0; top: 700%;">HTML</h1>
+							<p style="font-weight: bold; position: absolute; left: 0.5%; top: 1000%; color: rgb(17, 17, 17);">STRUCTURE</p>
+							<h1 style="font-weight: bold; position: absolute; right: 0; top: 300%;">JS</h1>
+							<p style="font-weight: bold; position: absolute; right: 0; top: 150%; color: rgb(17, 17, 17);">BEHAVIOR</p>
+							<h1 style="font-weight: bold; position: absolute; right: 0; top: 1100%;">CSS</h1>
+							<p style="font-weight: bold; position: absolute; right: 0; top: 1400%; color: rgb(17, 17, 17);">PRESENTATION</p>
+							<p style="font-weight: bold; position: absolute; left: 0; top: 1600%; color: rgb(255, 239, 112);">The Eval JavaScript Empire</p>
+						</div>
+						<div class="fragment" data-fragment-index="0">
+							<div style="background-color: rgb(194, 51, 101); width: 200%; height: 1500px; position: absolute; top: -100%; left: 0; z-index: 1;"></div>
+							<div style="background-color: rgb(88, 130, 186); width: 200%; height: 1500px; position: absolute; top: 875%; left: 0; z-index: 2;"></div>
+							<div class="visual-diagram" style="background-color: rgb(124, 196, 51); width: 100%; height: 1500px; position: absolute; top: -525%; left: -75%; z-index: 3;"></div>
+							<h1 style="z-index: 4; font-weight: bold; position: absolute; left: 0; top: 700%;">HTML</h1>
+							<p style="z-index: 4; font-weight: bold; position: absolute; left: 0.5%; top: 1000%; color: rgb(17, 17, 17);">INTERFACE</p>
+							<h1 style="z-index: 4; font-weight: bold; position: absolute; right: 0; top: 300%;">JS</h1>
+							<p style="z-index: 4; font-weight: bold; position: absolute; right: 0; top: 150%; color: rgb(17, 17, 17);">LOGIC</p>
+							<h1 style="z-index: 4; font-weight: bold; position: absolute; right: 0; top: 1100%;">CSS</h1>
+							<p style="z-index: 4; font-weight: bold; position: absolute; right: 0; top: 1400%; color: rgb(17, 17, 17);">PRESENTATION</p>
+							<p style="z-index: 4; font-weight: bold; position: absolute; left: 0; top: 1600%; color: rgb(255, 239, 112);">The New Angular Republic</p>
+						</div>
+					</section>
+					<section>
+						<p>Returns things to where they belong in their natural forms</p>
+						<ul>
+							<li>HTML? Build UI Declaratively!</li>
+							<li>CSS? Animations!</li>
+							<li>JavaScript? Use it the plain old way!</li>
+						</ul>
+					</section>
+					<section>
+						<img data-src="assets/angularjs.jpg" alt="AngularJS">
+					</section>
+				</section>
+
+				<!-- Run -->
+				<section>
+					<section>
+						<h2>Run</h2>
+						<pre>$ gulp serve</pre>
+					</section>
+					<section>
+						<img data-src="assets/bower.png" alt="Bower.io" style="border: none; background: none; box-shadow: none;">
+						<pre class="fragment">$ bower install</pre>
+					</section>
+					<section>
+						<h2>Again run</h2>
+						<pre>$ gulp serve</pre>
+					</section>
+				</section>
+
+				<!-- Lesson 1 -->
+				<section>
+					<section>
+						<h2>"Hello world"</h2>
+					</section>
+					<section>
+						<h2>Modules</h2>
+						<p>A container for differents parts of your app.</p>
+						<pre><code class="hljs" data-trim>
+// src/app/index.module.js
+
+(function() {
+  'use strict';
+
+  angular
+    .module('app', [
+
+      // Third Party Libraries
+      'ngRoute'
+
+      // Own modules...
+    ]);
+
+})();
+					</code></pre>
+					</section>
+					<section>
+						<h2>Routing</h2>
+						<pre><code class="hljs" data-trim>
+// src/app/index.route.js
+
+(function() {
+  'use strict';
+
+  angular
+    .module('app')
+    .config(config);
+
+  function config($routeProvider) {
+    $routeProvider
+      .otherwise({
+        redirectTo: '/'
+      });
+  }
+
+})();
+					</code></pre>
+					</section>
+					<section>
+						<h2>Bootstrapping</h2>
+						<h6 class="fragment highlight-red" data-fragment-index="1" style="text-transform: none">ng-app</h6>
+						<p class="fragment" data-fragment-index="1">This directive is used to flag the html element that Angular should consider to be the root element of our application</p>
+						<pre class="fragment" data-fragment-index="1"><code class="hljs" data-trim>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en" ng-app="app"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+					</code></pre>
+					</section>
+					<section>
+						<h2>Two-way Data Binding</h2>
+						<p>It's the automatic synchronization of data between the model and view.</p>
+						<img class="fragment" data-fragment-index="1" data-src="assets/binding.png" alt="Binding" style="border: none; background: none; box-shadow: none; border-radius: 5px;">
+						<pre class="fragment" data-fragment-index="1"><code class="hljs" data-trim>
+{{ 'Hello world' }}
+					</code></pre>
+					</section>
+					<section>
+						<img data-src="assets/helloworld.jpg" alt="Hellow world">
+					</section>
+				</section>
+
+				<!-- Lesson 2 -->
+				<section>
+					<section>
+						<h2>Controllers and views</h2>
+					</section>
+					<section>
+						<h2>Controllers</h2>
+						<p>A container for differents parts of your app.</p>
+						<pre><code class="hljs" data-trim>
+// src/app/controllers/core.js
+
+(function() {
+  'use strict';
+
+  angular
+      .module('app')
+      .controller('CoreController', CoreController);
+
+  function CoreController($scope) {
+    $scope.hi = 'Hello world from the controller';
+  }
+})();
+					</code></pre>
+						<pre><code class="hljs" data-trim>
+<!-- src/index.html -->
+&lt;div ng-controller=&quot;CoreController&quot;&gt;{{ hi }}&lt;/div&gt;
+					</code></pre>
+					</section>
+					<section>
+						<h2>controllerAs View Syntax</h2>
+						<p>Use the controllerAs syntax over the classic controller with $scope syntax.</p>
+						<pre><code class="hljs" data-trim>
+<!-- avoid -->
+&lt;div ng-controller="CoreController&gt;
+    {{ hi }}
+&lt;/div&gt;</code></pre>
+						<pre><code class="hljs" data-trim>
+<!-- recommended -->
+&lt;div ng-controller="CoreController as vm"&gt;
+    {{ vm.hi }}
+&lt;/div&gt;</code></pre>
+					</section>
+					<section>
+						<h2>controllerAs Controller Syntax</h2>
+						<p>The controllerAs syntax uses this inside controllers which gets bound to $scope.</p>
+						<pre><code class="hljs" data-trim>
+/* avoid */
+function CoreController($scope) {
+  $scope.hi = 'Hello world from the controller';
+}</code></pre>
+						<pre><code class="hljs" data-trim>
+/* recommended */
+function CoreController() {
+  var vm = this;
+  vm.hi = 'Hello world from the controller';
+}</code></pre>
+					</section>
+					<section>
+						<h2>Application Structure <span class="fragment highlight-red" data-fragment-index="2">LIFT</span> Principle</h2>
+						<p class="fragment" data-fragment-index="1">What?</p>
+						<p class="fragment" data-fragment-index="2">Structure your app such that you can <span style="color: red;">L</span>ocate your code quickly, <span style="color: red;">I</span>dentify the code at a glance, keep the <span style="color: red;">F</span>lattest structure you can, and <span style="color: red;">T</span>ry to stay DRY.</p>
+						<small class="fragment" data-fragment-index="2"><a href="https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md">[More info]</a></small>
+					</section>
+					<section>
+						<h2>Locate</h2>
+<blockquote><code><pre>
+/node_modules
+/bower_components
+/src
+  /app
+    /core
+      core.module.js
+    /main
+      /list
+        list.controller.js
+        list.html
+      /request
+        request.controller.js
+        request.html
+    index.module.js
+    index.route.js
+  assets/
+  index.html
+bower.json
+packages.json</pre></code></blockquote>
+					</section>
+					<section>
+						<h2>Structuring</h2>
+						<p class="fragment" data-fragment-index="1">Create a core module</p>
+												<pre class="fragment" data-fragment-index="1"><code class="hljs" data-trim>
+// src/app/core/core.module.js
+
+(function() {
+  'use strict';
+
+  angular
+    .module('app.core', [
+
+      // Third Party Libraries
+      'ngRoute'
+
+    ]);
+
+})();</code></pre>
+					</section>
+					<section>
+						<p>Index module</p>
+						<pre><code class="hljs" data-trim>
+// src/app/index.module.js
+
+(function() {
+  'use strict';
+
+  angular
+    .module('app', [
+
+      // Own modules
+      'app.core'
+
+    ]);
+
+})();</code></pre>
+					</section>
+					<section>
+						<p>My first module</p>
+						<pre><code class="hljs" data-trim>
+// src/app/main/request/request.module.js
+
+(function() {
+  'use strict';
+
+  angular
+      .module('app.request', []) // Create a new module
+      .config(config);
+
+  /* @ngInject */
+  function config($routeProvider) {
+    $routeProvider
+      .when('/', {
+        templateUrl: 'app/main/request/request.html',
+        controller: 'RequestController',
+        controllerAs: 'vm'
+      })
+  }
+})();
+</code></pre>
+					</section>
+					<section>
+						<p>My first controller</p>
+						<pre><code class="hljs" data-trim>
+// src/app/main/request/request.controller.js
+
+/**
+ * Request Controller
+ * @namespace Controllers
+ */
+(function() {
+  'use strict';
+
+  angular
+      .module('app.request')
+      .controller('RequestController', RequestController);
+
+  /**
+   * @namespace Request
+   * @desc Request to physiotherapist
+   * @memberOf Controllers
+   * @ngInject
+   */
+  function RequestController() {
+    var vm = this;
+
+    // Data
+    vm.hi = 'Hello world from controller (organised)';
+
+    // Methods
+    vm.send = send;
+
+    //////////
+
+    /**
+     * Send message
+     */
+    function send() {
+
+    }
+  }
+})();</code></pre>
+					</section>
+					<section>
+						<h2>VIEWS</h2>
+						<h6 class="fragment highlight-red" data-fragment-index="1" style="text-transform: none">ng-view</h6>
+						<p class="fragment" data-fragment-index="1">ngView is a directive that complements the $route service by including the rendered template of the current route into the main layout file.</p>
+						<pre class="fragment" data-fragment-index="1"><code class="hljs" data-trim>
+&lt;ng-view&gt;&lt;/ng-view&gt;
+					</code></pre>
+					</section>
+					<section>
+						<p>Don't forget to add the module into index.modules.js</p>
+						<pre class="fragment"><code class="hljs" data-trim>
+// Request
+'app.request'</code></pre>
+					</section>
+				</section>
+
+				<!-- Lesson 3 -->
+				<section>
+					<section>
+						<h2>Services</h2>
+					</section>
+					<section>
+						<p>Angular services are substitutable objects that are wired together using dependency injection (DI).</p>
+					</section>
+					<section>
+						<p>There are two ways to create a service:</p>
+						<ul>
+							<li>factory</li>
+							<li>service</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Using factory method</h2>
+						<pre><code class="hljs" data-trim>
+(function() {
+  'use strict';
+  angular
+      .module('app')
+      .factory('exampleFactory', exampleFactory);
+
+  function exampleFactory() {
+    var service;
+
+    service.multiply = function(a, b) {
+      return a * b
+    };
+
+    return service;
+  }
+}());</code></pre>
+					</section>
+					<section>
+						<h2>Using service method</h2>
+						<pre><code class="hljs" data-trim>
+(function() {
+  'use strict';
+  angular
+      .module('app')
+      .service('exampleService', exampleService);
+
+  function exampleService(exampleFactory) {
+    this.square = function(a, b) {
+      return exampleFactory.multiply(a, a);
+    };
+  }
+}());</code></pre>
+					</section>
+				</section>
+				<section>
+					<h2>Thank you</h2>
+					<img src="assets/thankyou.jpg">
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+		<script>
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+				]
+			});
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "name": "angular-application-development-workshop",
+  "version": "1.0.0",
+  "description": "Learn the fundamentals and principles of Angular and how to build single page applications.",
+  "main": "serve.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dixso/angular-application-development-workshop.git"
+  },
+  "keywords": [
+    "angularjs"
+  ],
+  "author": "Julio de la Calle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dixso/angular-application-development-workshop/issues"
+  },
+  "homepage": "https://github.com/dixso/angular-application-development-workshop#readme",
+  "dependencies": {
+    "gulp": "~3.9.1",
+    "gulp-serve": "^1.2.0"
+  }
+}
